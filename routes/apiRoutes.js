@@ -24,4 +24,15 @@ router.post("/api/workouts", (req, res) => {
     });
 });
 
-router.put();
+router.put("/api/workouts/:id", (req, res) => {
+  workout
+    .findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+
+module.exports = router;
